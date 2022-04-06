@@ -1,9 +1,12 @@
 var chai = require('chai');  
 var assert = chai.assert;    
 var expect = chai.expect;    
-var should = chai.should();  
+var should = chai.should();
+var sinon = require('sinon'); 
 var Add = require('../test/index')
 
+
+/*
 describe('Addition Test', function(){
     it('should return 3 when one and two', function(){
         var numberOne = 1;
@@ -31,3 +34,39 @@ describe('Addition Test', function(){
         assert.notEqual(actualResult, notexpectedResult);
     });
 });
+*/
+
+
+describe('Spy Tests', function(){
+    it('should log result of add', function(){
+        var numberOne = 1;
+        var numberTwo = 2;
+
+        var logSpy = sinon.spy()
+        Add(numberOne, numberTwo, logSpy);
+
+        logSpy.called.should.be.true;
+    })
+
+    it('should call log with result of add', function(){
+        var numberOne = 1;
+        var numberTwo = 2;
+
+        var logSpy = sinon.spy();
+        Add(numberOne, numberTwo, logSpy);
+
+        logSpy.calledWith(3).should.be.true;
+    })
+})
+
+
+// describe('ISAlive Tests', function(){
+    // // it('should return true when ping callback retrun true', function(){
+        // var pinger = sinon.stub();
+        // pinger.returns(true);
+// 
+        // var websiteIsAlive = IsAlive(pinger);
+// 
+        // websiteIsAlive.should.be.true;
+    // })
+// })
